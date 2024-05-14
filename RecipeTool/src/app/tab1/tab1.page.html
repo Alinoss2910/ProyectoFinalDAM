@@ -1,0 +1,18 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-label>Buscar receta</ion-label>
+  <ion-input type="text" placeholder="Chicken" #receta></ion-input>
+  <ion-button (click)="getRecipes(receta.value?.toString() ?? '')">Buscar</ion-button>
+
+  @for (item of recetas; track $index) {
+    
+    <ion-label>{{item.recipe.label}}</ion-label>
+  }
+</ion-content>
