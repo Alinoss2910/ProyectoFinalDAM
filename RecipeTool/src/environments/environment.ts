@@ -5,8 +5,11 @@
 export const environment = {
   production: false,
   API_URL: 'https://api.edamam.com/api/recipes/v2?type=public&q=',
+  API_URL_URI: 'https://api.edamam.com/api/recipes/v2/by-uri?type=public&uri=',
   API_ID: '6ef20e88',
   API_KEY: 'c0438b29686edd03da184ed227325d35',
+
+  API_USER_URL: 'http://localhost:28277/User/',
 };
 
 /*

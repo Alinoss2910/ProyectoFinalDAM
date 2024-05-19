@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ConnectionService } from '../services/connection.service';
-import { Receta } from '../models/Receta';
+import { Receta, MealType  } from '../models/Receta';
 
 @Component({
   selector: 'app-tab1',
@@ -11,10 +11,16 @@ export class Tab1Page {
 
   recetas: Receta[] = []
 
-  constructor(private connection: ConnectionService) {}
+  constructor(private connection: ConnectionService) {
+    this.getRecipes()
+  }
 
-  async getRecipes(query: string) {
-    this.recetas = await this.connection.getRecipes(query)
+  getRecipes() {
+    this.connection.getRandomTypeOfMeal(MealType.Breakfast)
+    .then((response) => {
+      this.recetas = response
+      console.log(this.recetas)
+    })
   }
 
 }
