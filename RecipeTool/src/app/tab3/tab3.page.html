@@ -7,11 +7,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <h1>Profile</h1>
+  @if (recetas.length === 0) {
+    <h3>Todavia no hay recetas</h3>
+  }
+  @else {
+    <h3>Discover new Dishes</h3>
+    
+    <app-recipe-cards [recetas]="recetas"></app-recipe-cards>
+  }
 </ion-content>

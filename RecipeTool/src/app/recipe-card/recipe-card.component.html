@@ -1,0 +1,15 @@
+@for (item of recetas; track item) {
+  <ion-card (click)="openRecipe(item)">
+    <ion-card-header>
+      <ion-card-title>{{item.recipe.label}}</ion-card-title>
+      <ion-card-subtitle>{{item.recipe.dishType}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-img [src]="item.recipe.image" alt="Dish"></ion-img>
+      <p>Calories: {{item.recipe.calories}}</p>
+    </ion-card-content>
+      <ion-fab-button size="small" (click)="addFavorite(item.recipe.uri)">
+        <ion-icon name="star" size="small"></ion-icon>
+      </ion-fab-button>
+  </ion-card>
+}

@@ -12,19 +12,40 @@ export class ConnectionService {
   API_URL = environment.API_URL
   API_ID = environment.API_ID
   API_KEY = environment.API_KEY
+  API_URI = environment.API_URL_URI
 
   constructor() { }
 
   async getRecipes(query: string) {
-    axios.get(`${this.API_URL}${query}&app_id=${this.API_ID}&app_key=${this.API_KEY}`)
+    return axios.get(`${this.API_URL}${query}&app_id=${this.API_ID}&app_key=${this.API_KEY}`)
     .then((response) => {
-      this.recetas = response.data.hits
-      console.log(this.recetas)
+      return response.data.hits
     })
     .catch((error) => {
       console.log(error)
     })
+  }
 
-    return this.recetas
+  async getRecipe(uri: string) {
+    uri = uri.replace('#', '%23')
+    return axios.get(`${this.API_URI}${uri}&app_id=${this.API_ID}&app_key=${this.API_KEY}&field=uri&field=label&field=image&field=healthLabels&field=cautions&field=ingredientLines&field=totalWeight&field=calories&field=url`)
+    .then((response) => {
+      return response.data.hits
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
+  getRandomTypeOfMeal(mealType: string) {
+    return axios.get(`${this.API_URL}&app_id=${this.API_ID}&app_key=${this.API_KEY}&mealType=${mealType}&random=true`)
+    .then((response) => {
+      return response.data.hits
+    })
+    .catch((error) => {
+      console.log(error)
+    })
   }
 }
+
+

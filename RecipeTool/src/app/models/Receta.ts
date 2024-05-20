@@ -36,19 +36,19 @@ interface Recipe {
     digest: Digest[];
 }
 
-interface Ingredient {
+export interface Ingredient {
     uri: string;
     label: string;
     image: string;
 }
 
-interface NutrientsInfo {
+export interface NutrientsInfo {
     label: string;
     quantity: number;
     unit: string;
 }
 
-interface Digest {
+export interface Digest {
     daily: number;
     hasRDI: boolean;
     label: string;
@@ -59,7 +59,7 @@ interface Digest {
     unit: string;
 }
 
-enum CuisineType {
+export const enum CuisineType {
     American = 'American',
     Asian = 'Asian',
     British = 'British',
@@ -80,7 +80,7 @@ enum CuisineType {
     SouthEastAsian = 'South East Asian',
 }
 
-enum MealType {
+export const enum MealType {
     Breakfast = 'Breakfast',
     Dinner = 'Dinner',
     Lunch = 'Lunch',
@@ -88,7 +88,7 @@ enum MealType {
     TeaTime = 'Tea Time',
 }
 
-enum DishType {
+export const enum DishType {
     BiscuitsAndCookies = 'Biscuits and cookies',
     Bread = 'Bread',
     Cereals = 'Cereals',

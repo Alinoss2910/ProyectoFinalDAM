@@ -7,12 +7,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-label>Buscar receta</ion-label>
-  <ion-input type="text" placeholder="Chicken" #receta></ion-input>
-  <ion-button (click)="getRecipes(receta.value?.toString() ?? '')">Buscar</ion-button>
-
-  @for (item of recetas; track $index) {
+  <h1>RecipeTool</h1>
+  @if (recetas.length === 0) {
+    <h3>Todavia no hay recetas</h3>
+  }
+  @else {
+    <h3>Discover new Dishes</h3>
     
-    <ion-label>{{item.recipe.label}}</ion-label>
+    <app-recipe-cards [recetas]="recetas"></app-recipe-cards>
   }
 </ion-content>
