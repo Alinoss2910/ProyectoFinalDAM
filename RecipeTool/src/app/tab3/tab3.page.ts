@@ -26,7 +26,7 @@ export class Tab3Page {
     const promises = this.recetasDTO.map(async (rec) => {
         try {
             const response = await this.conService.getRecipe(rec.url);
-            console.log(`Received recipe for URL ${rec.url}:`, response);
+            console.log(`Recived recipe for URL ${rec.url}:`, response);
             reci.push(response[0]);
         } catch (error) {
             console.log(`Error fetching recipe for URL ${rec.url}:`, error);

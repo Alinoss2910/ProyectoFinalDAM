@@ -10,17 +10,23 @@ import { RecipeDTO } from '../DTO/RecipeDTO';
 export class UserService {
 
   API_USER_URL = environment.API_USER_URL
+  loggedIn = false
 
   constructor() { }
 
-  login(user: User) {
-    return axios.post(`${this.API_USER_URL}Login`, user)
-    .then((response) => {
-      return response.data
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+  async login(user: User) {
+
+    var response = await axios.post(`${this.API_USER_URL}Login`, user)
+    console.log(response)
+    if (response.data) {
+      console.log("entra")
+      this.loggedIn = true
+    }
+    return response.data
+  }
+
+  isLoggedIn() {
+    return this.loggedIn
   }
 
   register(user: User) {

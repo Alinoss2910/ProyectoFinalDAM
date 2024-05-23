@@ -1,18 +1,24 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 3
+      Profile
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <h1>Profile</h1>
+  <ion-text class="ion-text-center">
+    <h1>Profile</h1>
+  </ion-text>
   @if (recetas.length === 0) {
-    <h3>Todavia no hay recetas</h3>
+    <ion-text class="ion-text-center">
+      <h3>No recipes yet</h3>
+    </ion-text>
   }
   @else {
-    <h3>Discover new Dishes</h3>
+    <ion-text class="ion-text-center">
+      <h3>Favorite Recipes</h3>
+    </ion-text>
     
     <app-recipe-cards [recetas]="recetas"></app-recipe-cards>
   }

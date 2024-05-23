@@ -1,22 +1,18 @@
+import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
 import { Component, Input } from '@angular/core';
 import { Receta } from '../models/Receta';
 import { RecipeDTO } from '../DTO/RecipeDTO';
 import { UserService } from '../services/user.service';
 import { Platform } from '@ionic/angular';
 import { Browser } from '@capacitor/browser';
-import { IonCard, IonCardHeader, IonCardTitle,
-  IonCardSubtitle, IonCardContent,
-  IonImg, IonItem, IonButton, 
-  IonFabButton, IonIcon } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-recipe-cards',
   templateUrl: './recipe-card.component.html',
   styleUrls: ['./recipe-card.component.scss'],
   standalone: true,
-  imports: [IonIcon, IonButton, IonCard, IonCardHeader, 
-    IonCardTitle, IonCardSubtitle, IonCardContent, 
-    IonImg, IonItem, IonFabButton]
+  imports: [CommonModule, IonicModule]
 })
 export class RecipeCardComponent {
 
