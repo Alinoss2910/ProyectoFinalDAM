@@ -59,50 +59,109 @@ export interface Digest {
     unit: string;
 }
 
-export const enum CuisineType {
-    American = 'American',
-    Asian = 'Asian',
-    British = 'British',
-    Caribbean = 'Caribbean',
-    CentralEurope = 'Central Europe',
-    Chinese = 'Chinese',
-    EasternEurope = 'Eastern Europe',
-    French = 'French',
-    Indian = 'Indian',
-    Italian = 'Italian',
-    Japanese = 'Japanese',
-    Kosher = 'Kosher',
-    Mediterranean = 'Mediterranean',
-    Mexican = 'Mexican',
-    MiddleEastern = 'Middle Eastern',
-    Nordic = 'Nordic',
-    SouthAmerican = 'South American',
-    SouthEastAsian = 'South East Asian',
+export  class CuisineType {
+    static American = 'American'
+    static Asian = 'Asian'
+    static British = 'British'
+    static Caribbean = 'Caribbean'
+    static CentralEurope = 'Central Europe'
+    static Chinese = 'Chinese'
+    static EasternEurope = 'Eastern Europe'
+    static French = 'French'
+    static Greek = 'Greek'
+    static Indian = 'Indian'
+    static Italian = 'Italian'
+    static Japanese = 'Japanese'
+    static Korean = 'Korean'
+    static Kosher = 'Kosher'
+    static Mediterranean = 'Mediterranean'
+    static Mexican = 'Mexican'
+    static MiddleEastern = 'Middle Eastern'
+    static Nordic = 'Nordic'
+    static SouthAmerican = 'South American'
+    static SouthEastAsian = 'South East Asian'
+    static World = 'World'
 }
 
-export const enum MealType {
-    Breakfast = 'Breakfast',
-    Dinner = 'Dinner',
-    Lunch = 'Lunch',
-    Snack = 'Snack',
-    TeaTime = 'Tea Time',
+export class MealType {
+    static Breakfast = 'Breakfast'
+    static Brunch = 'Brunch'
+    static LunchDinner = 'Lunch/Dinner'
+    static Snack = 'Snack'
+    static TeaTime = 'Tea Time'
 }
 
-export const enum DishType {
-    BiscuitsAndCookies = 'Biscuits and cookies',
-    Bread = 'Bread',
-    Cereals = 'Cereals',
-    CondimentsAndSauces = 'Condiments and sauces',
-    Drinks = 'Drinks',
-    Desserts = 'Desserts',
-    MainCourse = 'Main course',
-    Pancake = 'Pancake',
-    Preps = 'Preps',
-    Preserves = 'Preserves',
-    Salads = 'Salads',
-    Sandwiches = 'Sandwiches',
-    SideDish = 'Side dish',
-    Soup = 'Soup',
-    Starter = 'Starter',
-    Sweets = 'Sweets',
+export class DishType {
+    static AlcoholCocktail = 'Alcohol Cocktail'
+    static BiscuitsAndCookies = 'Biscuits and cookies'
+    static Bread = 'Bread'
+    static Cereals = 'Cereals'
+    static CondimentsAndSauces = 'Condiments and sauces'
+    static Desserts = 'Desserts'
+    static Drinks = 'Drinks'
+    static Egg = 'Egg'
+    static IcecreamAndCustard = 'Ice cream and custard'
+    static MainCourse = 'Main course'
+    static Pancake = 'Pancake'
+    static Pasta = 'Pasta'
+    static Pastry = 'Pastry'
+    static PiesAndTarts = 'Pies and tarts'
+    static Pizza = 'Pizza'
+    static Preps = 'Preps'
+    static Preserves = 'Preserves'
+    static Salad = 'Salad'
+    static Sandwiches = 'Sandwiches'
+    static SideDish = 'Side dish'
+    static Soup = 'Soup'
+    static SpecialOcasions = 'Special occasions'
+    static Starter = 'Starter'
+    static Sweets = 'Sweets'
+}
+
+export class HealthLabel {
+    AlcoholCocktail = 'Alcohol-Cocktail'
+    static AlcoholFree = 'Alcohol-Free'
+    static CeleryFree = 'Celery-Free'
+    static CrustaceanFree = 'Crustacean-Free'
+    static Dash = 'DASH'
+    static DairyFree = 'Dairy-Free'
+    static EggFree = 'Egg-Free'
+    static FishFree = 'Fish-Free'
+    static FodMapFree = 'FODMAP-Free'
+    static GlutenFree = 'Gluten-Free'
+    static ImmunoSupportive = 'Immuno-Supportive'
+    static KetoFriendly = 'Keto-Friendly'
+    static KidneyFriendly = 'Kidney-Friendly'
+    static Kosher = 'Kosher'
+    static LowPotassium = 'Low-Potassium'
+    static LowSugar = 'Low-Sugar'
+    static LupineFree = 'Lupine-Free'
+    static Mediterranean = 'Mediterranean'
+    static MolluskFree = 'Mollusk-Free'
+    static MustardFree = 'Mustard-Free'
+    static NoOilAdded = 'No-Oil-Added'
+    static NoSugar = 'No-Sugar'
+    static Paleo = 'Paleo'
+    static PeanutFree = 'Peanut-Free'
+    static Pescatarian = 'Pescatarian'
+    static PorkFree = 'Pork-Free'
+    static RedMeatFree = 'Red-Meat-Free'
+    static SesameFree = 'Sesame-Free'
+    static ShellfishFree = 'Shellfish-Free'
+    static SoyFree = 'Soy-Free'
+    static SugarConscious = 'Sugar-Conscious'
+    static SulfiteFree = 'Sulfite-Free'
+    static TreeNutFree = 'Tree-Nut-Free'
+    static Vegan = 'Vegan'
+    static Vegetarian = 'Vegetarian'
+    static WheatFree = 'Wheat-Free'
+}
+
+export class DietLabel {
+    static Balanced = 'Balanced'
+    static HighFiber = 'High-Fiber'
+    static HighProtein = 'High-Protein'
+    static LowCarb = 'Low-Carb'
+    static LowFat = 'Low-Fat'
+    static LowSodium = 'Low-Sodium'
 }

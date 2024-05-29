@@ -16,8 +16,8 @@ export class ConnectionService {
 
   constructor() { }
 
-  async getRecipes(query: string) {
-    return axios.get(`${this.API_URL}${query}&app_id=${this.API_ID}&app_key=${this.API_KEY}`)
+  async getRecipes(query: string, filtros: string) {
+    return axios.get(`${this.API_URL}${query}&app_id=${this.API_ID}&app_key=${this.API_KEY}${filtros}`)
     .then((response) => {
       return response.data.hits
     })
