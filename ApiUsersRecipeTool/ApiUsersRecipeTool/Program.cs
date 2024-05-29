@@ -1,7 +1,9 @@
 using ApiUsersRecipeTool.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,6 +46,37 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<TokenService>();
+
+string jwt_key = builder.Configuration.GetSection("JWT_SecretKey").Get<string>();
+
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwt_key)),
+        ValidateIssuerSigningKey = true,
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+
+    options.Events = new JwtBearerEvents
+    {
+        OnChallenge = async context =>
+        {
+            context.HandleResponse();
+            context.Response.StatusCode = 401;
+            context.Response.Headers.Append("result", "unathorized");
+            await context.Response.WriteAsync("No autorizado");
+        }
+    };
+});
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AnyOrigin",builder =>

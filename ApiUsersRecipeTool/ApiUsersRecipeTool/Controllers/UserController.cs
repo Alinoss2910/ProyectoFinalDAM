@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace ApiUsersRecipeTool.Controllers
 {
@@ -48,15 +49,17 @@ namespace ApiUsersRecipeTool.Controllers
                 return Unauthorized();
             }
 
-            var token = _tokenService.GenerateToken(dto.Username);
+            var token = _tokenService.GenerateToken(user);
             return Ok(new { Token = token });
         }
 
         [HttpGet("GetUser")]
         [Authorize]
-        public async Task<IActionResult> GetUser(string username)
+        public async Task<IActionResult> GetUser()
         {
-            var query = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            var query = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
             if (query == null)
             {
@@ -77,20 +80,23 @@ namespace ApiUsersRecipeTool.Controllers
         [Authorize]
         public async Task<IActionResult> FavoriteRecipes()
         {
-            var recipes = await _context.Recipes
-                .Include(r => r.User)
-                .ToListAsync();
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            recipes = recipes.Select(r => new Recipe
-            {
-                Id = r.Id,
-                Url = r.Url,
-                User = new User
+            var recipes = await _context.Recipes
+                .Where(r => r.User.Id == userId)
+                .Include(r => r.User)
+                .Select(r => new
                 {
-                    Id = r.User.Id,
-                    Username = r.User.Username
-                }
-            }).ToList();
+                    r.Id,
+                    r.Url,
+                    User = new
+                    {
+                        r.User.Id,
+                        r.User.Username
+                    }
+                })
+                .ToListAsync();
+                
 
             return Ok(recipes);
         }
@@ -100,12 +106,14 @@ namespace ApiUsersRecipeTool.Controllers
         public async Task<IActionResult> AddFavoriteRecipe([FromBody] RecipeDTO dto)
         {
 
-            if (dto.UserId == 0)
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            if (userId == 0)
             {
                 return BadRequest("Seleccione un Usuario Valido");
             }
 
-            var url = await _context.Recipes.FirstOrDefaultAsync(r => r.Url == dto.Url && r.User.Id == dto.UserId);
+            var url = await _context.Recipes.FirstOrDefaultAsync(r => r.Url == dto.Url && r.User.Id == userId);
 
             if (url != null)
             {
@@ -116,7 +124,7 @@ namespace ApiUsersRecipeTool.Controllers
             var recipe = new Recipe
             {
                 Url = dto.Url,
-                User = await _context.Users.FirstOrDefaultAsync(u => u.Id == dto.UserId)
+                User = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId)
             };
 
             await _context.Recipes.AddAsync(recipe);

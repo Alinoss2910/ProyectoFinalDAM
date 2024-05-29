@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using ApiUsersRecipeTool.Models;
 
 namespace ApiUsersRecipeTool.Data
 {
@@ -11,12 +12,12 @@ namespace ApiUsersRecipeTool.Data
         private const string SecretKey = "RA5vgMiAkQdIj5OVlhdwLKJHsda756has76";
         private readonly SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey));
 
-        public string GenerateToken(string username)
+        public string GenerateToken(User user)
         {
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, username),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.Username)
             };
 
             var tokenDescriptor = new SecurityTokenDescriptor
