@@ -53,10 +53,15 @@ namespace ApiUsersRecipeTool.Controllers
         }
 
         [HttpGet("GetUser")]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> GetUser(string username)
         {
             var query = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+
+            if (query == null)
+            {
+                return NotFound("User no encontrado");
+            }
 
             var user = new
             {
@@ -69,6 +74,7 @@ namespace ApiUsersRecipeTool.Controllers
         }
 
         [HttpGet("FavoriteRecipes")]
+        [Authorize]
         public async Task<IActionResult> FavoriteRecipes()
         {
             var recipes = await _context.Recipes
@@ -90,13 +96,13 @@ namespace ApiUsersRecipeTool.Controllers
         }
 
         [HttpPost("AddFavoriteRecipe")]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> AddFavoriteRecipe([FromBody] RecipeDTO dto)
         {
 
             if (dto.UserId == 0)
             {
-                return BadRequest("Usuario no encontrado");
+                return BadRequest("Seleccione un Usuario Valido");
             }
 
             var url = await _context.Recipes.FirstOrDefaultAsync(r => r.Url == dto.Url && r.User.Id == dto.UserId);
@@ -133,7 +139,7 @@ namespace ApiUsersRecipeTool.Controllers
         }
 
         [HttpDelete("DeleteFavoriteRecipe/{id}")]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> DeleteFavoriteRecipe(int id)
         {
             var recipe = await _context.Recipes.FirstOrDefaultAsync(r => r.Id == id);
@@ -147,6 +153,105 @@ namespace ApiUsersRecipeTool.Controllers
             await _context.SaveChangesAsync();
 
             return Ok("Receta eliminada con exito");
+        }
+
+        [HttpPost("CreateBuyList")]
+        [Authorize]
+        public async Task<IActionResult> CreateBuyList([FromBody] BuyListDTO dto)
+        {
+            var buyList = new BuyList();
+            buyList.Name = dto.Name;
+
+            if ( dto.Ingredients == null || dto.Ingredients.Count == 0)
+            {
+                return Ok("Lista creada con exito sin ingredientes");
+            }
+
+            foreach (var ingredient in dto.Ingredients)
+            {
+                buyList.Ingredients.Add(new Ingredient 
+                {
+                    Name = ingredient,
+                    BuyList = buyList
+                });
+            }
+
+            await _context.BuyLists.AddAsync(buyList);
+            await _context.SaveChangesAsync();
+
+            return Ok("Lista de compra creada con exito");
+        }
+
+        [HttpGet("GetBuyList/{id}")]
+        public async Task<IActionResult> GetBuyList(int id)
+        {
+            var buyList = await _context.BuyLists.FirstOrDefaultAsync(b => b.Id == id);
+
+            if (buyList == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(buyList);
+        }
+
+        [HttpDelete("DeleteBuyList/{id}")]
+        [Authorize]
+        public async Task<IActionResult> DeleteBuyList(int id)
+        {
+            var buyList = await _context.BuyLists.FirstOrDefaultAsync(b => b.Id == id);
+
+            if (buyList == null)
+            {
+                return NotFound();
+            }
+
+            _context.BuyLists.Remove(buyList);
+            await _context.SaveChangesAsync();
+
+            return Ok("Lista de compra eliminada con exito");
+        }
+
+        [HttpPost("AddIngredient")]
+        [Authorize]
+        public async Task<IActionResult> AddIngredient([FromBody] IngredientDTO dto)
+        {
+            var buyList = await _context.BuyLists.FirstOrDefaultAsync(b => b.Id == dto.BuyListId);
+
+            if (buyList == null)
+            {
+                return NotFound("Lista de compra no encontrada");
+            }
+
+            var ingredient = new Ingredient
+            {
+                Name = dto.Name,
+                BuyList = buyList
+            };
+
+            await _context.Ingredients.AddAsync(ingredient);
+            await _context.SaveChangesAsync();
+
+            return Ok("Ingrediente añadido con exito");
+        }
+
+        [HttpGet("RemoveIngredient/{id}")]
+        [Authorize]
+        public async Task<IActionResult> RemoveIngredient(int idList, int idIngredient)
+        {
+            var ingredient = await _context.Ingredients
+                .Include(idList => idList.BuyList)
+                .FirstOrDefaultAsync(i => i.Id == idIngredient && i.BuyList.Id == idList);
+
+            if (ingredient == null)
+            {
+                return NotFound("Ingrediente no encontrado");
+            }
+
+            _context.Ingredients.Remove(ingredient);
+            await _context.SaveChangesAsync();
+
+            return Ok("Ingrediente eliminado con exito");
         }
     }
 }
