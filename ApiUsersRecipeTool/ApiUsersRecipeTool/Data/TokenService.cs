@@ -23,7 +23,7 @@ namespace ApiUsersRecipeTool.Data
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddHours(1),
+                Expires = DateTime.UtcNow.AddDays(30),
                 SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256)
             };
 

@@ -65,9 +65,9 @@
         <ion-icon name="filter"></ion-icon>
       </ion-menu-button>
     </ion-buttons>
-    <ion-searchbar (keyup.enter)="handleSearchEvent(receta.value?.toString() ?? '')" #receta></ion-searchbar>
+    <ion-searchbar (keyup.enter)="handleSearchEvent(receta.value ?? '')" #receta></ion-searchbar>
     <ion-buttons slot="end">
-      <ion-button (click)="handleSearchEvent(receta.value?.toString() ?? '')">
+      <ion-button (click)="handleSearchEvent(receta.value ?? '')">
         <ion-icon name="search"></ion-icon>
       </ion-button>
     </ion-buttons>

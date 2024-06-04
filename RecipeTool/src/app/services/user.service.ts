@@ -19,7 +19,8 @@ export class UserService {
     var response = await axios.post(`${this.API_USER_URL}Login`, user)
     console.log(response)
     if (response.data) {
-      console.log("entra")
+      console.log("entra" + response.data)
+      axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
       this.loggedIn = true
     }
     return response.data
@@ -29,43 +30,27 @@ export class UserService {
     return this.loggedIn
   }
 
-  register(user: User) {
-    return axios.post(`${this.API_USER_URL}Register`, user)
-    .then((response) => {
-      return response.data
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+  async register(user: User) {
+    let response = await axios.post(`${this.API_USER_URL}Register`, user)
+
+    return response.data
   }
 
-  getUser(username: string) {
-    return axios.get(`${this.API_USER_URL}GetUser/${username}`)
-    .then((response) => {
-      return response.data
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+  async getUser(username: string) {
+    let response = await axios.get(`${this.API_USER_URL}GetUser/${username}`)
+  
+    return response.data
   }
 
-  getFavorites() {
-    return axios.get(`${this.API_USER_URL}FavoriteRecipes`)
-    .then((response) => {
-      return response.data
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+  async getFavorites() {
+    let response = await axios.get(`${this.API_USER_URL}FavoriteRecipes`)
+
+    return response.data
   }
 
-  addFavorite(recipe: RecipeDTO) {
-    return axios.post(`${this.API_USER_URL}AddFavoriteRecipe`, recipe)
-    .then((response) => {
-      return response.data
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+  async addFavorite(recipe: RecipeDTO) {
+    let response = await axios.post(`${this.API_USER_URL}AddFavoriteRecipe`, recipe)
+
+    return response.data
   }
 }

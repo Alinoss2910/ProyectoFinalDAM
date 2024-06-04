@@ -26,7 +26,13 @@ export class LoginPage {
   }
 
   register() {
-    console.log(`Username: ${this.Username}, Password: ${this.Password}`)
+    this.userService.register({Username: this.Username, Password: this.Password})
+    .then((response) => {
+      console.log(response.token)
+      if (response.token != "") {
+        this.router.navigate(['/tabs'])
+      }
+    })
   }
 
 }
