@@ -59,11 +59,16 @@ namespace ApiUsersRecipeTool.Controllers
         {
             int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
+            if (userId == 0)
+            {
+                return BadRequest("LogIn first!");
+            }
+
             var query = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
             if (query == null)
             {
-                return NotFound("User no encontrado");
+                return NotFound("User not found");
             }
 
             var user = new

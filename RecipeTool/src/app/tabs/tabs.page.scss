@@ -1,1 +1,8 @@
+ion-tab-bar, ion-tab-button{
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
 
+ion-tab-button{
+    --color-selected: #ffffff;
+}

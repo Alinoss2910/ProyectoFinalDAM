@@ -1,11 +1,22 @@
 ion-fab {
     position: fixed;
-    top: 1%;
-    right: 1%;
+    top: -3%;
+    right: -1%;
+}
+
+ion-fab-list:first-child ion-fab-list:last-child {
+    --background: green;
 }
 
 ion-card {
-  max-height: 70vh;
+  border-radius: 10px;
+  background-color: #262626;
+}
+
+ion-card-title {
+  font-size: 1.5em;
+  color: white;
+  width: 80%;
 }
 
 ion-icon {
@@ -13,6 +24,24 @@ ion-icon {
 }
 
 ion-fab-button {
-  --background: darkgreen;
-  box-shadow: none;
+  --background: transparent;
+  --box-shadow: none;
+}
+
+ion-img {
+  max-height: 50vh;
+}
+
+ion-img::part(image) {
+  border-radius: 10px;
+}
+
+#ingredients {
+  max-height: 13.5vh;
+  overflow: hidden;
+}
+
+#points{
+  margin-top: -10px;
+  margin-left: 5px;
 }

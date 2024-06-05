@@ -8,18 +8,25 @@
 .cards-container {
     display: flex;
     justify-content: center;
+    flex-flow: row wrap;
+    height: fit-content;
+    
 }
 
 .custom-card {
-    width: 90%;
+    max-width: 40%;
+    min-width: 30%;
+    height: fit-content;
     margin: 10px;
     border-radius: 10px;
+    background-color: #262626;
 }
 
 #ingredients {
     display: flex;
     justify-content: center;
     margin-top: 10px;
+    
 }
 
 ion-img {
@@ -34,4 +41,18 @@ ion-img::part(image) {
     margin-left: auto;
     margin-right: auto;
     display: block;
+}
+
+ion-list {
+    background: #262626;
+}
+
+ion-item {
+    --background: #262626;
+}
+
+ion-item-divider {
+    --color: white;
+    font-weight: 400;
+    font-size: medium;
 }
