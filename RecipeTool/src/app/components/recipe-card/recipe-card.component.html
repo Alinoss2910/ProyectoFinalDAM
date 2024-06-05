@@ -1,0 +1,31 @@
+@for (item of recetas; track item) {
+  <ion-card (click)="openRecipe(item)" class="ion-padding">
+    <ion-fab vertical="bottom" horizontal="end" class="ion-margin-top">
+      <ion-fab-button size="small" (click)="$event.stopPropagation()">
+        <ion-icon name="ellipsis-vertical"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="bottom">
+        <ion-fab-button (click)="infoRecipe(item); $event.stopPropagation()">
+          <ion-icon name="information-circle-sharp"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button (click)="addFavorite(item.recipe.uri); $event.stopPropagation()">
+          <ion-icon name="star-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+    <ion-card-header>
+      <ion-card-title>{{item.recipe.label}}</ion-card-title>
+      <ion-card-subtitle>{{item.recipe.dishType}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-img [src]="item.recipe.image" alt="Dish"></ion-img>
+      <section>
+        <h2 class="ion-padding"><b>Calories:</b> {{item.recipe.calories.toFixed(2)}}</h2>
+        <h2><b>Ingredients</b></h2>
+        @for (item of item.recipe.ingredientLines; track $index) {
+          <p>{{item}}</p>
+        }
+      </section>
+      </ion-card-content>
+  </ion-card>
+}

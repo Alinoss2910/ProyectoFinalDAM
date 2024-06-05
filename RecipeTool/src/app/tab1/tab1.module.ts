@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
-import { RecipeCardComponent } from '../recipe-card/recipe-card.component';
+import { RecipeCardComponent } from '../components/recipe-card/recipe-card.component';
 
 @NgModule({
   imports: [

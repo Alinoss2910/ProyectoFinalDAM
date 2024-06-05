@@ -1,0 +1,65 @@
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>{{recipe.recipe.label}}</ion-title>
+        <ion-buttons slot="end">
+          <ion-button color="medium" (click)="cancel()">Back</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <div class="principalContent">
+        <ion-img class="center" [src]="recipe.recipe.image" alt="Dish"></ion-img>
+        <div id="ingredients">
+          <ion-card class="custom-card">
+            <ion-card-header>
+              <ion-card-title>Ingredients</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-list>
+                <ion-item *ngFor="let ingredient of recipe.recipe.ingredientLines">
+                  <ion-label>{{ingredient}}</ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </div>
+        <div class="cards-container">
+
+          <ion-card class="custom-card">
+            <ion-card-header>
+              <ion-card-title>Health Labels</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-list>
+                <ion-item *ngFor="let healthLabel of recipe.recipe.healthLabels">
+                  <ion-label>{{healthLabel}}</ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+
+          <ion-card class="custom-card">
+            <ion-card-header>
+              <ion-card-title>Nutrients</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-list>
+                @for (nutrient of recipe.recipe.digest; track $index) {
+                  <ion-item-group>
+                    <ion-item-divider>
+                      <ion-label>{{nutrient.label}}</ion-label>
+                    </ion-item-divider>
+                    <ion-item>
+                      <ion-label slot="end">{{nutrient.total.toFixed(2)}} {{nutrient.unit}}</ion-label>
+                    </ion-item>
+                  </ion-item-group>
+                }
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </div>
+
+
+    </ion-content>
+    

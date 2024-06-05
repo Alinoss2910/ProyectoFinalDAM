@@ -1,0 +1,18 @@
+ion-fab {
+    position: fixed;
+    top: 1%;
+    right: 1%;
+}
+
+ion-card {
+  max-height: 70vh;
+}
+
+ion-icon {
+  color: white;
+}
+
+ion-fab-button {
+  --background: darkgreen;
+  box-shadow: none;
+}

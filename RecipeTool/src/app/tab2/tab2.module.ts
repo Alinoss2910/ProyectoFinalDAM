@@ -6,7 +6,7 @@ import { Tab2Page } from './tab2.page';
 
 
 import { Tab2PageRoutingModule } from './tab2-routing.module';
-import { RecipeCardComponent } from '../recipe-card/recipe-card.component';
+import { RecipeCardComponent } from '../components/recipe-card/recipe-card.component';
 
 @NgModule({
   imports: [
