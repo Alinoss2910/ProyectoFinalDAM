@@ -4,8 +4,13 @@ ion-fab {
     right: -1%;
 }
 
-ion-fab-list:first-child ion-fab-list:last-child {
-    --background: green;
+ion-fab-list {
+  margin-top: 70%;
+}
+
+ion-fab-button.fab-button-close-active {
+  --color: var(--ion-color-danger);
+  --transition: opacity 0 ease-in;
 }
 
 ion-card {
@@ -14,6 +19,7 @@ ion-card {
 }
 
 ion-card-title {
+  min-height: 50px;
   font-size: 1.5em;
   color: white;
   width: 80%;
@@ -26,6 +32,7 @@ ion-icon {
 ion-fab-button {
   --background: transparent;
   --box-shadow: none;
+  margin-bottom: -20%;
 }
 
 ion-img {
