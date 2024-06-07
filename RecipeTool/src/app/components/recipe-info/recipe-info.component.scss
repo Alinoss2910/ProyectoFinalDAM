@@ -24,8 +24,16 @@
 
 #ingredients {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     margin-top: 10px;
+
+    ion-card {
+        width: 90%;
+        border-radius: 10px;
+        background-color: #262626;
+    }
     
 }
 

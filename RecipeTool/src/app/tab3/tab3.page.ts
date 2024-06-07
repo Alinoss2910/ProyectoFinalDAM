@@ -21,6 +21,14 @@ export class Tab3Page {
     
   }
 
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      this.getFavorites()
+      this.getRecipes()
+      event.target.complete();
+    }, 2000);
+  }
+
   async getFavorites() {
     let reci: Receta[] = [];
     const promises = this.recetasDTO.map(async (rec) => {

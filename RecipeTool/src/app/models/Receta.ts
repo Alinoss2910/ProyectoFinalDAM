@@ -85,10 +85,10 @@ export  class CuisineType {
 
 export class MealType {
     static Breakfast = 'Breakfast'
-    static Brunch = 'Brunch'
-    static LunchDinner = 'Lunch/Dinner'
+    static Lunch = 'Lunch'
+    static Dinner = 'Dinner'
     static Snack = 'Snack'
-    static TeaTime = 'Tea Time'
+    static TeaTime = 'TeaTime'
 }
 
 export class DishType {

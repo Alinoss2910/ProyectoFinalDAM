@@ -12,7 +12,10 @@ export class UserService {
   API_USER_URL = environment.API_USER_URL
   loggedIn = false
 
-  constructor() { }
+  constructor() { 
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
+    console.log(axios.defaults.headers.common['Authorization']);
+  }
 
   async login(user: User) {
 
@@ -20,6 +23,7 @@ export class UserService {
     console.log(response)
     if (response.data) {
       console.log("entra" + response.data)
+      localStorage.setItem('token', response.data.token)
       axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
       this.loggedIn = true
     }

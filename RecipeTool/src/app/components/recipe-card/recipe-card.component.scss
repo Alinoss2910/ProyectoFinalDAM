@@ -16,6 +16,7 @@ ion-fab-button.fab-button-close-active {
 ion-card {
   border-radius: 10px;
   background-color: #262626;
+  max-width: 400px;
 }
 
 ion-card-title {
@@ -35,8 +36,10 @@ ion-fab-button {
   margin-bottom: -20%;
 }
 
-ion-img {
+ion-img, ion-skeleton-text {
+  min-height: 30vh;
   max-height: 50vh;
+  --border-radius	: 10px;
 }
 
 ion-img::part(image) {
@@ -44,11 +47,15 @@ ion-img::part(image) {
 }
 
 #ingredients {
-  max-height: 13.5vh;
+  max-height: 15vh;
   overflow: hidden;
 }
 
 #points{
   margin-top: -10px;
   margin-left: 5px;
+}
+
+ion-title {
+  margin-left: -20px;
 }

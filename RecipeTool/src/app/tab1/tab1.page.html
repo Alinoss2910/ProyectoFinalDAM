@@ -1,5 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+      <ion-icon name="home" slot="start" size="large"></ion-icon>
     <ion-title>
       Home
     </ion-title>
@@ -7,19 +8,60 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-text class="ion-text-center">
-    <h1>RecipeTool</h1>
-  </ion-text>
-  @if (recetas.length === 0) {
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div id="logoContainer">
+  </div>
+  @if (recetasBreakfast.length === 0) {
     <ion-text class="ion-text-center">
-      <h3>No recipes yet</h3>
+      <h2>No recipes yet</h2>
     </ion-text>
   }
   @else {
     <ion-text class="ion-text-center">
-      <h3>Discover new Dishes</h3>
+      <h2>Discover new Dishes</h2>
     </ion-text>
+
+    <ion-item-divider class="ion-margin-bottom"></ion-item-divider>
+
+    <ion-text class="ion-text-left">
+      <h3>Breakfast</h3>
+    </ion-text>
+    <ion-item-divider class="ion-margin-bottom"></ion-item-divider>
     
-    <app-recipe-cards [recetas]="recetas"></app-recipe-cards>
+    <app-recipe-cards [recetas]="recetasBreakfast"></app-recipe-cards>
+    <ion-item-divider class="ion-margin-bottom"></ion-item-divider>
+
+    <ion-text class="ion-text-left">
+      <h3>Brunch</h3>
+    </ion-text>
+    <ion-item-divider class="ion-margin-bottom"></ion-item-divider>
+    
+    <app-recipe-cards [recetas]="recetasBrunch"></app-recipe-cards>
+    <ion-item-divider class="ion-margin-bottom"></ion-item-divider>
+
+    <ion-text class="ion-text-left">
+      <h3>Lunch</h3>
+    </ion-text>
+    <ion-item-divider class="ion-margin-bottom"></ion-item-divider>
+    
+    <app-recipe-cards [recetas]="recetasLunch"></app-recipe-cards>
+    <ion-item-divider class="ion-margin-bottom"></ion-item-divider>
+
+    <ion-text class="ion-text-left">
+      <h3>Snack</h3>
+    </ion-text>
+    <ion-item-divider class="ion-margin-bottom"></ion-item-divider>
+    
+    <app-recipe-cards [recetas]="recetasSnack"></app-recipe-cards>
+    <ion-item-divider class="ion-margin-bottom"></ion-item-divider>
+
+    <ion-text class="ion-text-left">
+      <h3>Teatime</h3>
+    </ion-text>
+    <ion-item-divider class="ion-margin-bottom"></ion-item-divider>
+    
+    <app-recipe-cards [recetas]="recetasTeaTime"></app-recipe-cards>
   }
 </ion-content>

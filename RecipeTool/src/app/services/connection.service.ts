@@ -38,7 +38,7 @@ export class ConnectionService {
   }
 
   getRandomTypeOfMeal(mealType: string) {
-    return axios.get(`${this.API_URL}&app_id=${this.API_ID}&app_key=${this.API_KEY}&mealType=${mealType}&random=true`)
+    return axios.get(`${this.API_URL}&app_id=${this.API_ID}&app_key=${this.API_KEY}&mealType=${mealType}&random=true&from=0&to=5`)
     .then((response) => {
       return response.data.hits
     })

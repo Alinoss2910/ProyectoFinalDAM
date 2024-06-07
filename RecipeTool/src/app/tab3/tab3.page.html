@@ -7,19 +7,27 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-text class="ion-text-center">
     <h1>Profile</h1>
   </ion-text>
   @if (recetas.length === 0) {
     <ion-text class="ion-text-center">
-      <h3>No recipes yet</h3>
+      <h2>No recipes yet</h2>
     </ion-text>
   }
   @else {
-    <ion-text class="ion-text-center">
-      <h3>Favorite Recipes</h3>
-    </ion-text>
+    <ion-accordion-group>
+      <ion-accordion value="first">
+        <ion-item slot="header">
+          <ion-label>Favorite Recipes</ion-label>
+        </ion-item>
+        <ion-label>Hola</ion-label>
+        <app-recipe-cards slot="content" [recetas]="recetas"></app-recipe-cards>
+      </ion-accordion>
+    </ion-accordion-group>
     
-    <app-recipe-cards [recetas]="recetas"></app-recipe-cards>
   }
 </ion-content>

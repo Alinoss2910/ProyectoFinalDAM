@@ -8,13 +8,16 @@ import { Platform } from '@ionic/angular';
 import { Browser } from '@capacitor/browser';
 import { ModalController } from '@ionic/angular';
 import { RecipeInfoComponent } from '../recipe-info/recipe-info.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @Component({
   selector: 'app-recipe-cards',
   templateUrl: './recipe-card.component.html',
   styleUrls: ['./recipe-card.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule]
+  imports: [CommonModule, IonicModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
 })
 export class RecipeCardComponent {
 
