@@ -1,5 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-icon name="person" slot="start" size="large"></ion-icon>
     <ion-title>
       Profile
     </ion-title>
@@ -25,7 +26,7 @@
           <ion-label>Favorite Recipes</ion-label>
         </ion-item>
         <ion-label>Hola</ion-label>
-        <app-recipe-cards slot="content" [recetas]="recetas"></app-recipe-cards>
+        <app-recipe-cards slot="content" [recetas]="recetas" [isFavorite]="true"></app-recipe-cards>
       </ion-accordion>
     </ion-accordion-group>
     

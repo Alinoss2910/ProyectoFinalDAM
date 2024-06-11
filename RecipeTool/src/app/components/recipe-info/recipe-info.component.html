@@ -26,61 +26,61 @@
           </ion-card>
         </div>
         <div class="cards-container">
-
-          <ion-card class="custom-card">
-            <ion-card-header>
-              <ion-card-title>Health Labels</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-list lines="none">
-                @for (healthLabel of recipe.recipe.healthLabels; track $index) {
-                  <ion-item>
-                    <ion-label>{{healthLabel}}</ion-label>
-                  </ion-item>
-                }
-              </ion-list>
-            </ion-card-content>
-          </ion-card>
-
-          <ion-card class="custom-card">
-            <ion-card-header>
-              <ion-card-title>Nutrients</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-list lines="none">
-                @for (nutrient of recipe.recipe.digest; track $index) {
-                  <ion-item-group>
-                    <ion-item-divider>
-                      <ion-label>{{nutrient.label}}</ion-label>
-                    </ion-item-divider>
+          <div class="cards-container-left">
+            <ion-card class="custom-card">
+              <ion-card-header>
+                <ion-card-title>Health Labels</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-list lines="none">
+                  @for (healthLabel of recipe.recipe.healthLabels; track $index) {
                     <ion-item>
-                      <ion-label slot="end">{{nutrient.total.toFixed(2)}} {{nutrient.unit}}</ion-label>
+                      <ion-label>{{healthLabel}}</ion-label>
                     </ion-item>
-                  </ion-item-group>
-                }
-              </ion-list>
-            </ion-card-content>
-          </ion-card>
+                  }
+                </ion-list>
+              </ion-card-content>
+            </ion-card>
 
-          <ion-card class="custom-card">
-            <ion-card-header>
-              <ion-card-title>Nutrients</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-list lines="none">
-                @for (nutrient of recipe.recipe.digest; track $index) {
-                  <ion-item-group>
-                    <ion-item-divider>
-                      <ion-label>{{nutrient.label}}</ion-label>
-                    </ion-item-divider>
-                    <ion-item>
-                      <ion-label slot="end">{{nutrient.total.toFixed(2)}} {{nutrient.unit}}</ion-label>
-                    </ion-item>
-                  </ion-item-group>
-                }
-              </ion-list>
-            </ion-card-content>
-          </ion-card>
+          </div>
+          <div class="cards-container-right">
+
+            <ion-card class="custom-card">
+              <ion-card-header>
+                <ion-card-title>Cautions</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-list lines="none">
+                  @for (caution of recipe.recipe.cautions; track $index) {
+                      <ion-item>
+                        <ion-label>{{caution}}</ion-label>
+                      </ion-item>
+                  }
+                </ion-list>
+              </ion-card-content>
+            </ion-card>
+
+            <ion-card class="custom-card">
+              <ion-card-header>
+                <ion-card-title>Nutrients</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-list lines="none">
+                  @for (nutrient of recipe.recipe.digest; track $index) {
+                    <ion-item-group>
+                      <ion-item-divider>
+                        <ion-label>{{nutrient.label}}</ion-label>
+                      </ion-item-divider>
+                      <ion-item>
+                        <ion-label slot="end">{{nutrient.total.toFixed(2)}} {{nutrient.unit}}</ion-label>
+                      </ion-item>
+                    </ion-item-group>
+                  }
+                </ion-list>
+              </ion-card-content>
+            </ion-card>
+  
+          </div>
         </div>
       </div>
 

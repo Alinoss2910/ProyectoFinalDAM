@@ -22,6 +22,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 export class RecipeCardComponent {
 
   @Input() recetas: Receta[] = [];
+  @Input() isFavorite: boolean = false;
   receta!: RecipeDTO;
 
   constructor(private userService: UserService, private platform: Platform, private modalCtrl: ModalController) { }

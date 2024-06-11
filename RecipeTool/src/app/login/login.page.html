@@ -1,30 +1,35 @@
 <ion-content [fullscreen]="true">
-  @if (OpcionLogin) {
+  <!-- @if (OpcionLogin) {
     <ion-title>Login</ion-title>
   }
   @else {
     <ion-title>Sign up</ion-title>
-  }
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Log in</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item>
-        <ion-label position="floating">Username</ion-label>
-        <ion-input type="email" [(ngModel)]="Username"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Password</ion-label>
-        <ion-input type="password" [(ngModel)]="Password"></ion-input>
-      </ion-item>
-      @if (OpcionLogin) {
-        <ion-button (click)="login()">Login</ion-button>
-        <ion-label (click)="OpcionLogin = false">Don't register yet?</ion-label>
-      }
-      @else {
-        <ion-button (click)="register()">Sign up</ion-button>
-        <ion-label (click)="OpcionLogin = true">Alredy have an Account?</ion-label>
-      }
-    </ion-card-content>
-  </ion-card>
+  } -->
+  <div class="card-container">
+    <ion-card>
+      <ion-card-header>
+        @if (!OpcionLogin) {
+          <ion-card-title>Sign up</ion-card-title>
+        }
+        @else {
+          <ion-card-title>Log in</ion-card-title>
+        }
+      </ion-card-header>
+      <ion-card-content>
+          <ion-input label="Email" fill="outline" label-placement="floating" type="email" [(ngModel)]="Username"></ion-input>
+          <ion-input label="Password" fill="outline" label-placement="floating" type="password" [(ngModel)]="Password">
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+          </ion-input>
+        @if (OpcionLogin) {
+          <ion-button (click)="login()">Login</ion-button>
+          <ion-label (click)="OpcionLogin = false">Don't register yet?</ion-label>
+        }
+        @else {
+          <ion-button (click)="register()">Sign up</ion-button>
+          <ion-label (click)="OpcionLogin = true">Alredy have an Account?</ion-label>
+        }
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>

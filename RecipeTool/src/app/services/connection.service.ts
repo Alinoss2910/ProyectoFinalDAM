@@ -28,7 +28,7 @@ export class ConnectionService {
 
   async getRecipe(uri: string) {
     uri = uri.replace('#', '%23')
-    return axios.get(`${this.API_URI}${uri}&app_id=${this.API_ID}&app_key=${this.API_KEY}&field=uri&field=label&field=image&field=healthLabels&field=cautions&field=ingredientLines&field=totalWeight&field=calories&field=url`)
+    return axios.get(`${this.API_URI}${uri}&app_id=${this.API_ID}&app_key=${this.API_KEY}&field=uri&field=label&field=image&field=healthLabels&field=cautions&field=ingredientLines&field=totalWeight&field=calories&field=url&field=digest`)
     .then((response) => {
       return response.data.hits
     })

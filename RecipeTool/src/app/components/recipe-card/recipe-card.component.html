@@ -12,7 +12,12 @@
             <ion-icon name="information-circle-sharp"></ion-icon>
           </ion-fab-button>
           <ion-fab-button (click)="addFavorite(item.recipe.uri); $event.stopPropagation()">
-            <ion-icon name="star-outline"></ion-icon>
+            @if (isFavorite) {
+              <ion-icon name="star"></ion-icon>
+            }
+            @else {
+              <ion-icon name="star-outline"></ion-icon>
+            }
           </ion-fab-button>
         </ion-fab-list>
       </ion-fab>
