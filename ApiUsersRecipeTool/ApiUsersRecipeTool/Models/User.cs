@@ -15,7 +15,7 @@ namespace ApiUsersRecipeTool.Models
         [Required]
         public string Password { get; set; }
 
-        public List<Recipe> Recipes { get; set; }
-        public List<BuyList> BuyLists { get; set; }
+        public List<Recipe>? Recipes { get; set; }
+        public List<BuyList>? BuyLists { get; set; }
     }
 }

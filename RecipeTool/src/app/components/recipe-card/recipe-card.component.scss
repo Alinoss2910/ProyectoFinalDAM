@@ -17,6 +17,7 @@ ion-card {
   border-radius: 10px;
   background-color: #262626;
   max-width: 400px;
+  height: 55vh;
 }
 
 ion-card-title {
@@ -47,7 +48,7 @@ ion-img::part(image) {
 }
 
 #ingredients {
-  max-height: 13vh;
+  max-height: 120px;
   overflow: hidden;
 }
 

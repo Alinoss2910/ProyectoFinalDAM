@@ -5,6 +5,7 @@ import { Receta } from '../models/Receta';
 import { ConnectionService } from '../services/connection.service';
 import { Platform } from '@ionic/angular';
 import { Browser } from '@capacitor/browser';
+import { BuyList } from '../models/BuyList';
 
 @Component({
   selector: 'app-tab3',
@@ -62,6 +63,12 @@ export class Tab3Page {
     } else {
       window.open(url, '_blank');
     }
+  }
+
+  async createBuyList(buylist: BuyList) {
+    let response = await this.userService.createBuyList(buylist)
+
+    return response.data
   }
 
 }

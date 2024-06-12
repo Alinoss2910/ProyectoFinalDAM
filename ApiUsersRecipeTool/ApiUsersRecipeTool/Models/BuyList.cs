@@ -12,6 +12,10 @@ namespace ApiUsersRecipeTool.Models
         [Required]
         public string Name { get; set; }
 
-        public List<Ingredient> Ingredients { get; set; }
+        [ForeignKey("UserId")]
+        public User User { get; set; }
+
+        public List<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
     }
 }
+

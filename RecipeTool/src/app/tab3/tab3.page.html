@@ -1,9 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-icon name="person" slot="start" size="large"></ion-icon>
-    <ion-title>
-      Profile
-    </ion-title>
+    <ion-icon class="ion-margin-start" name="person" slot="start" size="large"></ion-icon>
+    <ion-button class="ion-margin-end" slot="end">
+      <ion-icon slot="icon-only" name="settings"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -21,12 +21,36 @@
   }
   @else {
     <ion-accordion-group>
-      <ion-accordion value="first">
+      <ion-accordion>
         <ion-item slot="header">
           <ion-label>Favorite Recipes</ion-label>
         </ion-item>
         <ion-label>Hola</ion-label>
         <app-recipe-cards slot="content" [recetas]="recetas" [isFavorite]="true"></app-recipe-cards>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <ion-text class="ion-margin">
+      <h2>BuyLists</h2>
+    </ion-text>
+
+    <ion-accordion-group>
+      <ion-accordion>
+        <ion-item slot="header">
+          <ion-label>BuyList</ion-label>
+        </ion-item>
+          <ion-accordion-group slot="content">
+            @for (item of recetas; track $index) {
+
+              <ion-accordion>
+                <ion-item slot="header">
+                  <ion-label>BuyList</ion-label>
+                </ion-item>
+                <ion-label>Hola</ion-label>
+              </ion-accordion>
+            }
+
+          </ion-accordion-group>
       </ion-accordion>
     </ion-accordion-group>
     

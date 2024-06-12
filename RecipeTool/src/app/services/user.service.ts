@@ -3,6 +3,7 @@ import axios from 'axios';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/User';
 import { RecipeDTO } from '../DTO/RecipeDTO';
+import { BuyList } from '../models/BuyList';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,36 @@ export class UserService {
 
   async addFavorite(recipe: RecipeDTO) {
     let response = await axios.post(`${this.API_USER_URL}AddFavoriteRecipe`, recipe)
+
+    return response.data
+  }
+
+  async createBuyList(buylist: BuyList) {
+    let response = await axios.post(`${this.API_USER_URL}CreateBuyList`)
+
+    return response.data
+  }
+
+  async getBuyList() {
+    let response = await axios.get(`${this.API_USER_URL}GetBuyList`)
+
+    return response.data
+  }
+
+  async deleteBuyList(idList: number) {
+    let response = await axios.delete(`${this.API_USER_URL}DeleteBuyList/${idList}`)
+
+    return response.data
+  }
+
+  async addIngredientToList(ingredient: string) {
+    let response = await axios.post(`${this.API_USER_URL}AddIngredient`, ingredient)
+
+    return response.data
+  }
+
+  async deleteIngredientFromList(idlist: number, idingredient: number) {
+    let response = await axios.delete(`${this.API_USER_URL}RemoveIngredient?idList=${idlist}&idIngredient=${idingredient}`)
 
     return response.data
   }

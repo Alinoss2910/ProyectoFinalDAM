@@ -172,11 +172,24 @@ namespace ApiUsersRecipeTool.Controllers
         [Authorize]
         public async Task<IActionResult> CreateBuyList([FromBody] BuyListDTO dto)
         {
+
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            if (userId == 0)
+            {
+                return BadRequest("LogIn first!");
+            }
+
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
             var buyList = new BuyList();
             buyList.Name = dto.Name;
+            buyList.User = user;
 
             if ( dto.Ingredients == null || dto.Ingredients.Count == 0)
             {
+                await _context.BuyLists.AddAsync(buyList);
+                await _context.SaveChangesAsync();
                 return Ok("Lista creada con exito sin ingredientes");
             }
 
@@ -195,10 +208,34 @@ namespace ApiUsersRecipeTool.Controllers
             return Ok("Lista de compra creada con exito");
         }
 
-        [HttpGet("GetBuyList/{id}")]
-        public async Task<IActionResult> GetBuyList(int id)
+        [HttpGet("GetBuyLists")]
+        public async Task<IActionResult> GetBuyList()
         {
-            var buyList = await _context.BuyLists.FirstOrDefaultAsync(b => b.Id == id);
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            if (userId == 0)
+            {
+                return BadRequest("LogIn first!");
+            }
+
+            var buyList = await _context.BuyLists
+                .Include(bl => bl.User)
+                .Where(bl => bl.User.Id == userId)
+                .Select(bl => new
+                {
+                    bl.Id,
+                    bl.Name,
+                    Ingredients = _context.Ingredients
+                        .Where(i => i.BuyList.Id == bl.Id)
+                        .Select(i => new
+                        {
+                            i.Id,
+                            i.Name
+                        })
+                        .ToList()
+                    
+                })
+                .ToListAsync();
 
             if (buyList == null)
             {
@@ -248,7 +285,7 @@ namespace ApiUsersRecipeTool.Controllers
             return Ok("Ingrediente añadido con exito");
         }
 
-        [HttpGet("RemoveIngredient/{id}")]
+        [HttpDelete("RemoveIngredient")]
         [Authorize]
         public async Task<IActionResult> RemoveIngredient(int idList, int idIngredient)
         {
