@@ -34,19 +34,32 @@
       <h2>BuyLists</h2>
     </ion-text>
 
+    <ion-input type="text" placeholder="List name" #listName></ion-input>
+    <ion-button (click)="createBuyList(listName.value?.toString() ?? '')">Add List</ion-button>
+
     <ion-accordion-group>
       <ion-accordion>
         <ion-item slot="header">
-          <ion-label>BuyList</ion-label>
+          <ion-label>BuyLists</ion-label>
         </ion-item>
           <ion-accordion-group slot="content">
-            @for (item of recetas; track $index) {
+            @for (item of buyLists; track $index) {
 
               <ion-accordion>
                 <ion-item slot="header">
-                  <ion-label>BuyList</ion-label>
+                  <ion-label>{{item.name}}</ion-label>
                 </ion-item>
-                <ion-label>Hola</ion-label>
+                <ion-list slot="content">
+                  @for (ingredient of item.ingredients; track $index) {
+                    <ion-item>
+                      <ion-label>{{ingredient.name}}
+                        <ion-button (click)="deleteIngredientFromList(item.id, ingredient.id)">
+                          <ion-icon name="remove-circle"></ion-icon>
+                        </ion-button>
+                      </ion-label>
+                    </ion-item>
+                  }
+                </ion-list>
               </ion-accordion>
             }
 

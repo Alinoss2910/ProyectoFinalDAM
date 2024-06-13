@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { User } from '../models/User';
 import { RecipeDTO } from '../DTO/RecipeDTO';
 import { BuyList } from '../models/BuyList';
+import { Ingredient } from '../models/Ingredient';
 
 @Injectable({
   providedIn: 'root'
@@ -60,14 +61,15 @@ export class UserService {
   }
 
   async createBuyList(buylist: BuyList) {
-    let response = await axios.post(`${this.API_USER_URL}CreateBuyList`)
+    let response = await axios.post(`${this.API_USER_URL}CreateBuyList`, buylist)
 
     return response.data
   }
 
   async getBuyList() {
-    let response = await axios.get(`${this.API_USER_URL}GetBuyList`)
-
+    let response = await axios.get(`${this.API_USER_URL}GetBuyLists`)
+    console.log(response.data);
+    
     return response.data
   }
 
@@ -77,8 +79,9 @@ export class UserService {
     return response.data
   }
 
-  async addIngredientToList(ingredient: string) {
-    let response = await axios.post(`${this.API_USER_URL}AddIngredient`, ingredient)
+  async addIngredientToList(ingredient: string, idBuyList: number) {
+    let ingredientSend = new Ingredient(ingredient, idBuyList)
+    let response = await axios.post(`${this.API_USER_URL}AddIngredient`, ingredientSend)
 
     return response.data
   }

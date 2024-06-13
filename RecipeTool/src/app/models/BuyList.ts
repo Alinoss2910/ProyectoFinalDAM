@@ -1,13 +1,11 @@
 import { Ingredient } from "./Ingredient"
 
 export class BuyList {
-    id: number
+    id!: number
     name: string
-    ingredients: Ingredient[]
+    ingredients!: Ingredient[]
 
-    constructor(id: number, name: string, ingredients: Ingredient[]) {
-        this.id = id
+    constructor(name: string) {
         this.name = name
-        this.ingredients = ingredients
     }
 }

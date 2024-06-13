@@ -1,9 +1,10 @@
 export class Ingredient {
-    id: number;
+    id!: number;
     name: string;
+    buyListId: number;
 
-    constructor(id: number, name: string) {
-        this.id = id;
+    constructor(name: string, buyListId: number) {
         this.name = name;
+        this.buyListId = buyListId;
     }
 }

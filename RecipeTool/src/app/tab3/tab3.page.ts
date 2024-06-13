@@ -16,16 +16,17 @@ export class Tab3Page {
 
   recetasDTO: RecipeDTO[] = []
   recetas: Receta[] = []
+  buyLists: BuyList[] = []
 
   constructor(private userService: UserService, private conService: ConnectionService, private platform: Platform) {
     this.getRecipes()
-    
+    this.getBuyLists()
   }
 
   handleRefresh(event: any) {
     setTimeout(() => {
-      this.getFavorites()
       this.getRecipes()
+      this.getBuyLists()
       event.target.complete();
     }, 2000);
   }
@@ -65,8 +66,35 @@ export class Tab3Page {
     }
   }
 
-  async createBuyList(buylist: BuyList) {
+  async createBuyList(buylistName: string) {
+
+    let buylist = new BuyList(buylistName)
+    buylist.ingredients = []
+    console.log(JSON.stringify(buylist));
+    
     let response = await this.userService.createBuyList(buylist)
+
+    return response.data
+  }
+
+  async deleteBuyList(id: number) {
+    let response = await this.userService.deleteBuyList(id)
+
+    return response.data
+  }
+
+  async getBuyLists() {
+    let response = await this.userService.getBuyList()
+
+    this.buyLists = response
+    console.log(response);
+    console.log(this.buyLists);
+    
+    return response.data
+  }
+
+  async deleteIngredientFromList(idList: number, idIngredient: number) {
+    let response = await this.userService.deleteIngredientFromList(idList, idIngredient)
 
     return response.data
   }
