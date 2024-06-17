@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-icon class="ion-margin-start" name="person" slot="start" size="large"></ion-icon>
-    <ion-button class="ion-margin-end" slot="end">
+    <ion-button class="ion-margin-end" slot="end" id="open-modal">
       <ion-icon slot="icon-only" name="settings"></ion-icon>
     </ion-button>
   </ion-toolbar>
@@ -34,8 +34,12 @@
       <h2>BuyLists</h2>
     </ion-text>
 
-    <ion-input type="text" placeholder="List name" #listName></ion-input>
-    <ion-button (click)="createBuyList(listName.value?.toString() ?? '')">Add List</ion-button>
+    <div id="addList">
+      <ion-input type="text" placeholder="List name" #listName></ion-input>
+      <ion-button (click)="createBuyList(listName.value?.toString() ?? '')" icon="">
+        <ion-icon name="add-circle"></ion-icon>
+      </ion-button>
+    </div>
 
     <ion-accordion-group>
       <ion-accordion>
@@ -68,4 +72,25 @@
     </ion-accordion-group>
     
   }
+  <ion-modal trigger="open-modal" [initialBreakpoint]="1" [breakpoints]="[0, 1] ">
+    <ng-template>
+      <div class="block">
+        <ion-accordion-group id="editProfile">
+          <ion-accordion >
+            <ion-item slot="header">
+              <ion-label>Profile</ion-label>
+            </ion-item>
+            <ion-item slot="content">
+              <ion-input label="Username: " #username></ion-input>
+            </ion-item>
+            <ion-item slot="content">
+              <ion-input label="Pasword: " type="password" #pass></ion-input>
+            </ion-item>
+          </ion-accordion>
+        </ion-accordion-group>
+        <ion-button (click)="updateUser(username.value?.toString() ?? '', pass.value?.toString() ?? '')">Edit Profile</ion-button>
+        <ion-button (click)="logout()">Logout</ion-button>
+      </div>
+    </ng-template>
+  </ion-modal>
 </ion-content>

@@ -81,6 +81,32 @@ namespace ApiUsersRecipeTool.Controllers
             return Ok(user);
         }
 
+        [HttpPut("EditUser")]
+        [Authorize]
+        public async Task<IActionResult> EditUser([FromBody] AuthDTO dto)
+        {
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            if (userId == 0)
+            {
+                return BadRequest("LogIn first!");
+            }
+
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            user.Username = dto.Username != "" ? dto.Username : user.Username;
+            user.Password = dto.Password != "" ? _userService.HashPassword(dto.Password) : user.Password;
+
+            await _context.SaveChangesAsync();
+
+            return Ok("Usuario editado con exito");
+        }
+
         [HttpGet("FavoriteRecipes")]
         [Authorize]
         public async Task<IActionResult> FavoriteRecipes()

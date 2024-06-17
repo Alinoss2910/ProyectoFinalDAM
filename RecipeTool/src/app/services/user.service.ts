@@ -48,6 +48,12 @@ export class UserService {
     return response.data
   }
 
+  async updateUser(user: User) {
+    let response = await axios.put(`${this.API_USER_URL}EditUser`, user)
+
+    return response.data
+  }
+
   async getFavorites() {
     let response = await axios.get(`${this.API_USER_URL}FavoriteRecipes`)
 

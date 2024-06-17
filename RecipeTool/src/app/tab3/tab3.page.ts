@@ -6,6 +6,8 @@ import { ConnectionService } from '../services/connection.service';
 import { Platform } from '@ionic/angular';
 import { Browser } from '@capacitor/browser';
 import { BuyList } from '../models/BuyList';
+import { Router } from '@angular/router';
+import { User } from '../models/User';
 
 @Component({
   selector: 'app-tab3',
@@ -18,7 +20,7 @@ export class Tab3Page {
   recetas: Receta[] = []
   buyLists: BuyList[] = []
 
-  constructor(private userService: UserService, private conService: ConnectionService, private platform: Platform) {
+  constructor(private userService: UserService, private conService: ConnectionService, private platform: Platform, private router: Router) {
     this.getRecipes()
     this.getBuyLists()
   }
@@ -96,6 +98,18 @@ export class Tab3Page {
   async deleteIngredientFromList(idList: number, idIngredient: number) {
     let response = await this.userService.deleteIngredientFromList(idList, idIngredient)
 
+    return response.data
+  }
+
+  logout() {
+    localStorage.removeItem('token')
+    this.userService.loggedIn = false
+    this.router.navigate(['/login'])
+  }
+
+  async updateUser(username: string, pass: string) {
+    let user = new User(username, pass)
+    let response = await this.userService.updateUser(user)
     return response.data
   }
 
