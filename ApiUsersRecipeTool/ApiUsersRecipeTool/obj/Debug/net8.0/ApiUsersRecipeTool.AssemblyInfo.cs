@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("9eb03543-8342-4690-a6d1-8f99bf39a88e")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("ApiUsersRecipeTool")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4c38d594fa17cf4bb9cdf844a04952e4f3d3101a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+55362c152d9edbc65066187ad0f321d41acbddb3")]
 [assembly: System.Reflection.AssemblyProductAttribute("ApiUsersRecipeTool")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ApiUsersRecipeTool")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
